@@ -10,9 +10,9 @@ As of version 3.0, this virtual machine name is CSE-VM, and the release name is 
 
 An instructor may customize this release by importing the .ova file into VirtualBox, making changes, and exporting a new .ova file, which should be named with the source and section (and optional version) appended, e.g., CSE-VM-3.0-CSE1325-001.ova.
 
-Major version numbers correspond to the underlying Ubuntu Long Term Support (LTS) release: 1.x was built on Lubuntu 16.04, 2.x was built on Lubuntu 18.04, and 3.x is built on Xubuntu 20.04.[^1]
+Major version numbers correspond to the underlying Ubuntu Long Term Support (LTS) release: 1.x was built on Lubuntu 16.04, 2.x was built on Lubuntu 18.04, and 3.x is built on Xubuntu 20.04.
 
-[^`]: The switch to Xubuntu reflects the rewrite of the LDXE desktop on which Lubuntu is built, from Gtk+ to Qt, leading to concern over possible stability issues. Xfce, on which Xubuntu is based, is Gtk+ based (currently used for CSE1325), lightweight, and stable.
+> The switch to Xubuntu reflects the rewrite of the LDXE desktop on which Lubuntu is built, from Gtk+ to Qt, leading to concern over possible stability issues. Xfce, on which Xubuntu is based, is Gtk+ based (currently used for CSE1325), lightweight, and stable.
 
 Minor version numbers indicate the semester for which that virtual machine is intended. 3.0 indicates fall of 2020, 3.1 spring of 2021, 3.2 fall of 2021, and 3.3 spring of 2022. Fall of 2022 will then move to the next LTS release, 22.04, as version 4.0, with whatever desktop seems most advantageous at that time.
 
@@ -63,41 +63,41 @@ To launch a program after its package has been installed, type its package name 
 
 In the VirtualBox menu, select Devices -> Shared Clipboard -> Bidirectional. This will enable copy / paste from this document to the terminal or into dialogs.
 
-In Xubuntu, press Control-Alt-T to open a terminal.
+In Xubuntu, press Control-Alt-t to open a terminal.
 
 1. [Install the following package](#how-to-install-packages) to better integrate Xubuntu with the host system: **virtualbox-ext-pack**
 2. Type the following command to reboot the virtual machine: **``sudo reboot``**
 3. In the VirtualBox menu, select View -> Autosize Display. This will resize the Xubuntu desktop to match the size of the window in which it is running.
-4. Reboot again, either with ``sudo reboot`` at the command line, or by clicking the start menu (upper right, with a mouse on it) -> power button -> Restart.
+4. Reboot again, either with ``sudo reboot`` at the command line, or by clicking the start menu (upper left, with a mouse on it) -> power button -> Restart.
 
 ## Configure the Panel
 
 Xubuntu supports multiple panels (one of which Windows sometimes calls the "task bar"). Configure it to operate more like Windows:
 
-1. Right-click the start menu (in the upper right corner, with a mouse on it) and select Panel -> Panel Preferences. Deselect "Lock Panel", then click Close.
+1. Right-click the start menu (in the upper left corner, with a mouse on it) and select Panel -> Panel Preferences. Deselect "Lock Panel", then click Close.
 2. Drag the panel to the bottom, using the newly visible "friction pad" on the far left. 
 3. Right-click the start menu (now in the lower right corner, where students will expect it) and select Panel -> Panel Preferences. Select "Lock Panel". Don't click Close yet!
 4. In the Appearance tab, Icons section, enable Adjust Size Automatically. Under Opacity, set both Enter and Leave to 100%.
-5. In the Items tab, configure the following items. After adding an item, right click
-    * Whisker Menu
-    * Launcher - Firefox
-    * Launcher - Terminal Emulator
-    * Launcher - File Manager (Thunar)
-    * Launcher - Text Editor (Gedit)
-    * Screenshot (gnome-screenshot)
-    * Separator x2
-    * Window Buttons
-    * Separator
-    * Notification Area
-    * Indicator Plugin
-    * Status Notifier Plugin
-    * PulseAudio Plugin
-    * Separator
-    * System Load Monitor (xfce-taskmanager)
-    * Separator
-    * Clock
-    * Separator
-    * Action Buttons: Shutdown with "Show Confirmation Dialog"
+5. In the Items tab, configure the following items. To add an item, click the green +, select it from the list, and click +Add. After adding an item, select it and click the gear icon on the right to configure it. To configure a Launcher, click the green + to select an installed application from the list as specified.
+    * **Whisker Menu:** The defaults should be fine. Changing Panel Button -> Display to Icon and Title, and setting the Title to Start, may be more intuitive for Windows users.
+    * **Launcher - Firefox**
+    * **Launcher - Terminal Emulator**
+    * **Launcher - File Manager:** This is Thunar
+    * **Launcher - Text Editor:** This is Gedit
+    * **Screenshot**: This is gnome-screenshot, not scrot
+    * **Separator** x2: This is near the top of the Add New Items list, just below Launcher. Add 2.
+    * **Window Buttons**
+    * **Separator**
+    * **Notification Area**
+    * **Indicator Plugin**
+    * **Status Notifier Plugin**
+    * **PulseAudio Plugin**
+    * **Separator**
+    * **System Load Monitor:** Set Monitor to xfce-taskmanager. Set Update Interval to 0.5 seconds, Power-Saving Interval is 1 second. Enable all 4 monitors, with Options set to cpu, mem, and swap (uptime supports no Options). 
+    * **Separator**
+    * **Clock**
+    * **Separator**
+    * **Action Buttons:** Shutdown with "Show Confirmation Dialog"
 6. Click Close now!
 
 ## Set the Wallpaper
@@ -113,18 +113,57 @@ Set a distinctive wallpaper to clearly indicate the window running the virtual m
 
 ## Open the menu on Super
 
-Configure Xubuntu to open the start menu with the Super key (sometimes called the Windows key), since this is familiar behavior to Windows users.
+Configure Xubuntu to open the start menu with the Super key (called the Windows key for Windows 10), since this is familiar behavior to Windows users.
 
 1. Select the start menu -> Settings -> Keyboard -> Application Shortcuts.
 2. Click Add.
 3. Type ``xfce4-popup-whiskermenu`` as the command, deselect "Use Startup Notification", and click OK.
-4. When prompted, press Super.
+4. When prompted, press Super (the key with the Windows logo on it).
 
 If you look through the list, you'll see ``xfce4-popup-whiskermenu`` in the alphabetized Command column, with ``Super L`` associated with it in the Shortcut column.
 
-## Update .bashrc and .bash_aliases
+## Usability Package Installations
 
-Add a .bash_aliases to the home directory, i.e., ~/.bash_aliases.  The contents of this file is provided in Appendix A, and also in this repository as bash_aliases (note the missing leading dot). It may be tweaked by a competent bash developer for better Linux usability. (NOTE: If this script exists, .bashrc will automatically execute it when bash starts.)
+Install the following packages.
+
+1. Install the following packages to support the 'div' script: ``figlet boxes lolcat``
+3. Install the following package to support locating files anywhere by name fragment: ``mlocate``
+3. Install the following package to support searching PDFs, e.g., lecture notes: ``pdfgrep``
+4. Install the following package for quick screenshots: ``scrot``
+
+## Manual Program Installations
+
+A few executables are not available in the system repository, but can be added to the /home/student/bin directory. NOTE: Ubuntu will automatically detect this directory and add it to the student's path each time bash is launched.
+
+3. Create directory ~/bin using this bash command: ``mkdir ~/bin``  
+4. Add the [following executable](https://the.exa.website/install) to bin to support the lt and lx directory listers: ``exa``
+5. Add the [following JAR file](https://plantuml.com/download) to bin to support UML diagram generation: ``plantuml.jar``
+6. Add the following script to bin to run Plant UML as an executable (use ``chmod a+x plantuml`` to make it executable): ``plantuml``
+
+         #!/usr/bin/env bash
+         /usr/bin/java -jar /home/student/bin/plantuml.jar $@
+
+## Popular Editor Installations
+
+Xubuntu defaults to Mousepad, a perfectly reasonable Notepad equivalent. Some students want... more.
+
+1. Install the two gedit packages as a more capable replacement for mousepad as default editor: ``gedit gedit-plugins``
+2. Install Code::Blocks as an optional editor: ``codeblocks``
+2. Use this command to install Visual Studio Code as an optional editor, which can then be launched as ``code``: ``sudo snap install --classic code``
+
+## Development Package Installations
+
+4. Install the following package to provide developer documentation: ``devhelp``
+1. Install the following package to support C/C++ development: ``build-essential``
+2. Install the following packages to support C++ GUI development (the -doc versions add documentation to devhelp): ``libgtkmm-3.0-dev libgstreamermm-1.0-dev libgtkmm-3.0-doc libgstreamermm-1.0-doc``
+3. Install the following packages to support Java development (note: openjdk-14-jdk is now available, if preferred): ``openjdk-11-jdk``
+4. Python 3 is preinstalled, but install the following package to manage Python plug-ins: ``python3-pip``
+3. Install the following package to support debugging and profiling Linux programs: ``valgrind``
+2. Install the following package to support version control (or install ``git-all``, if a stand-alone GUI is also desired): ``git``
+3. Install the following package to support visual differencing and merging: ``meld``
+5. Install the following package to support counting lines of code: ``cloc``
+
+## Update .bashrc
 
 Edit ~/.bashrc so that the bash prompt ends in a neutrally-colored $ when the previous command concluded successfully, but in a red @ when the previous command failed. (This helps to teach students why returning an int from main is important.)  Replace this line:
 
@@ -134,84 +173,57 @@ with
 
 ``PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$( [ $? == 0 ] && echo "\$ " || echo "\[\033[1;31m\]@ \[\033[00m\]" '``
 
-## Usability Package Installations
+## Add .bash_aliases
 
-Install the following packages.
+Add a .bash_aliases to the home directory, i.e., ~/.bash_aliases.  The content of this file is provided in Appendix A, and also in this repository as bash_aliases (note the missing leading dot, which you must add after copying). It may be tweaked by a competent bash developer, or by students after importing the appliance. 
 
-1. Install the following packages to support the 'div' script: figlet boxes lolcat
-3. Install the following package to support locating files anywhere by name fragment: mlocate
-3. Install the following package to support searching PDFs, e.g., lecture notes: pdfgrep
-4. Install the following package for quick screenshots: scrot
+(NOTE: When bash launches, the .bashrc script is run, and it will automatically execute .bash_aliases if it exists.)
 
-## Manual Program Installations
+## Add .gitconfig
 
-A few executables are not available in the system repository, but can be added to the local bin directory. NOTE: Ubuntu will automatically detect this directory and add it to the student's path each time bash is launched.
+Add a .gitconfig to the home directory, i.e., ~/.gitconfig.  The content of this file is provided in Appendix B, and also in this repository as gitconfig (note the missing leading dot, which you must add after copying). It may be tweaked by a competent git guru, or by students after importing the appliance. 
 
-3. Create directory ~/bin using this bash command: ``mkdir ~/bin``  
-4. Add the [following executable](https://the.exa.website/install) to bin to support the lt and lx directory listers: exa
-5. Add the [following JAR file](https://plantuml.com/download) to bin to support UML diagram generation: plantuml.jar 
-6. Add the following script to bin to run Plant UML as an executable (use ``chmod a+x plantuml`` to make it executable): plantuml
+(NOTE: When git first launches, it will ask for the student's name and email and add them to .gitconfig.)
 
-         #!/usr/bin/env bash
-         /usr/bin/java -jar /home/student/bin/plantuml.jar $@
-
-## Popular Editor Installations
-
-Xubuntu defaults to Mousepad, a perfectly reasonable Notepad equivalent. Some students want... more.
-
-1. Install gedit as a more capable replacement for mousepad as the default editor: gedit gedit-plugins
-2. Install Code::Blocks as an optional editor: codeblocks
-2. Use this command to install Visual Studio Code as an optional editor, which can then be launched as ``code``: ``sudo snap install --classic code``
-
-## Development Package Installations
-
-4. Install the following package to provide developer documentation: devhelp
-1. Install the following package to support C/C++ development: build-essential
-2. Install the following packages to support C++ GUI development (the -doc versions add documentation to devhelp): libgtkmm-3.0-dev libgstreamermm-1.0-dev libgtkmm-3.0-doc libgstreamermm-1.0-doc
-3. Install the following packages to support Java development (note: openjdk-14-jdk is now available, if preferred): openjdk-11-jdk
-4. Python 3 is preinstalled, but install the following packages to better support Python development: python3-pip
-3. Install the following package to support debugging and profiling Linux programs: valgrind
-2. Install the following package to support version control (or git-all, if a stand-alone GUI is desired): git
-3. Install the following package to support visual differencing and merging: meld
-5. Install the following package to support counting lines of code: cloc
 
 ## Export
 
 Exporting the new virtual machine to a .ova file simplifies distribution to students.
+
+Be sure the virtual machine is configured the way you want it to boot first for the students. Disconnect any shared drives. Changed to windowed rather than full screen mode. Ensure the user to auto-login in student, and that the password is student (they can change it after importing the appliance).
 
 1. In the VirtualBox main window select File -> Export Appliance. 
 2. Select the OVF 1.0 format and click Next. 
 3. Complete the product information. Note that if any license is specified, then the students will be asked to accept that license. 
 4. Click Export. This may take some time. Patience.
 
-## Appendix A: .bash_aliases file
+## Appendix A
 
-Copy the text below into the student home directory of the virtual machine. The file must be named .bash_aliases. This file, along with the configuration documented above, adds the following bash commands to assist the students.
+Copy the text below into the student home directory of the virtual machine as file .bash_aliases. This file, along with the configuration documented above, adds the following bash commands to assist the students.
 
-* **e *.cpp** – Opens the file(s) in each associated default editor (works with .pdf, .png, .jpg... all associated types!)
-* **eall** – Opens *.h, *.cpp, and Makefile in gedit.  Tabs are sorted by class name, 
-with each .h just to left of its .cpp!
+* **e hello.cpp** – Opens the file(s) in each associated default editor (works with .pdf, .png, .jpg... all associated types!)
+* **eall** – Opens .h, .cpp, .java, .py, and Makefile in gedit.  Tabs are sorted by class name, 
+with each .h just to left of its .cpp, and with Makefile to the far right.
 * **ec class** – Opens class.h and class.cpp
-* **c17** – Compiles the file(s) using C++ 17 syntax
-* **g17** – Compiles the file(s) using C++ 17 syntax with the gtkmm 3.0 libraries
+* **c17 hello.cpp** – Compiles the file(s) using C++ 17 syntax
+* **g17 dialog.cpp** – Compiles the file(s) using C++ 17 syntax with the gtkmm 3.0 libraries
 * **div** – Displays a colorful start-of-build marker to help you find your first error message
-* **notify** – Displays AND speaks your message, preceded by  "success:" if  command succeeded, "failed:" if not
+* **notify message** – Displays AND speaks the message, preceded by  "success:" if the previous command succeeded, "failed:" if not
 * **m** – Identical to make, but starts with "div" and ends with "notify"
 * **git lg** – Displays colorful list of all commits, with ASCII-graphical map of branches
-* **git dates** – Same as lg, but commit date and time to the second
-* **cloc *.h *.cpp Makefile** – Counts the Lines Of Code in the filenames
+* **git dates** – Same as lg, but commit date and time are to the second (note that clever students can manipulate these date and time records, even on GitHub)
+* **cloc main.cpp Makefile** – Counts the Lines Of Code in the filenames
 * **pdfgrep polymorphism Syllabus.pdf** – prints all lines in Syllabus.pdf containing the word "polymorphism"
-* **pdfgreps polymorphism** – prints all lines from all files recursively containing "polymorphism" 
-(useful for searching all lectures or class notes)
+* **pdfgreps polymorphism** – prints all lines from all PDF files recursively that contain "polymorphism" (useful for searching all lectures or class notes)
 * **doc** – Change to the Documents folder
 * **dl** – Change to the Downloads folder
-* **dev** – Change to your development folder (git repository, if used in this class)
-* **prof** – Change to the professor's git repository for the class (if used in this class)
-* **paths** – Shows path, one directory per line
+* **dev** – Change to your development folder (git repository, if used in this class), students may configure at top of .bash_aliases
+* **prof** – Change to the professor's git repository for the class (if used in this class), students may configure at top of .bash_aliases
+* **paths** – Shows the path, one directory per line, which is easier to read
 * **mkcd newdir** – Creates new directory newdir, and changes to it
 * **exa** – A more powerful ls (try lx and lt)
-* **backup** – Duplicates the current directory to a date-tagged peer directory
-* **meld** – Compares and merges files
+* **backup** – Duplicates the current directory to a date-tagged peer directory (be careful with large directory structures!)
+* **meld** – Compares and merges files visually, particularly helpful with git merges
 * **valgrind** – Supports debugging and profiling Linux applications
 
 ---
@@ -323,6 +335,44 @@ cloc-delta() {
 # Fix retext configuration
 QT_STYLE_OVERRIDE="fusion"
 
+```
+
+## Appendix B
+
+Copy the text below into the student home directory of the virtual machine as file .gitconfig, or download gitconfig from the repository and rename it. This file preconfigures git to operate conveniently, with colorful output, caching the GitHub credentials, setting difftool and mergetool to use meld, and adding a couple of aliases.
+
+NOTE: Permanently caching the student's GitHub credentials is very convenient but assumes the student's laptop is protected, as these credentials are stored as a plain text file in the VM. To save the credentials only in memory and for a limited time (in this case, 8 hours), replace the credentials section with:
+
+```
+[credential]
+    helper = cache --timeout 28800
+```
+
+---
+
+```
+[color]
+	ui = auto
+[alias]
+	logline = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+	lg = !"git branches"
+[push]
+	default = simple
+[credential]
+	helper = store
+[diff]
+	tool = meld
+[difftool]
+	prompt = false
+[difftool "meld"]
+	cmd = meld "$LOCAL" "$REMOTE"
+[merge]
+	tool = meld
+[mergetool "meld"]
+	# Choose one of these 2 lines (not both!)
+	cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
+	# cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
 ```
 
 

@@ -1,0 +1,23 @@
+[color]
+	ui = auto
+[alias]
+	logline = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+	lg = !"git branches"
+[push]
+	default = simple
+[credential]
+	helper = store
+[diff]
+	tool = meld
+[difftool]
+	prompt = false
+[difftool "meld"]
+	cmd = meld "$LOCAL" "$REMOTE"
+[merge]
+	tool = meld
+[mergetool "meld"]
+	# Choose one of these 2 lines (not both!)
+	cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
+	# cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
+
