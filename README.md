@@ -8,7 +8,7 @@ This release is currently Alpha 2, and [is available for download](https://drive
 
 As of version 3.0, this virtual machine name is CSE-VM, and the release name is CSE-VM-3.0. 
 
-An instructor may customize this release by importing the .ova file into VirtualBox, making changes, and exporting a new .ova file, which should be named with the source and section (and optional version) appended, e.g., CSE-VM-3.0-CSE1325-001.ova.
+An instructor may customize this release by importing the .ova file into VirtualBox, making changes, and exporting a new .ova file, which should be named with the cource and section (and optional version) appended, e.g., CSE-VM-3.0-CSE1325-001.ova.
 
 Major version numbers correspond to the underlying Ubuntu Long Term Support (LTS) release: 1.x was built on Lubuntu 16.04, 2.x was built on Lubuntu 18.04, and 3.x is built on Xubuntu 20.04.
 
@@ -58,6 +58,18 @@ Multiple packages may be included on the same command line, e.g., ``sudo apt ins
 
 To launch a program after its package has been installed, type its package name unless otherwise indicated, or open the start menu and start typing its name, or navigate the category menus under start. The bash command ``man figlet`` provides the manual for the figlet program.
 
+## Configure Guest Utilities
+
+The guest utilities package improves integration of the virtual Linux desktop with the host desktop (such as Windows, Mac OS, or Linux).
+
+In Xubuntu, press Control-Alt-t to open a terminal.
+
+1. [Install the following package](#how-to-install-packages) to better integrate Xubuntu with the host system: **virtualbox-guest-utils**
+2. Add your user to the VBox user group (required should you decide to share a folder with the host OS) using **``sudo usermod -a -G vboxsf student``**
+
+Note: We no longer recommend sharing folders between host and virtual operating systems. Text editors sometimes complain that files cannot be saved to the shared folder, necessitating that the file be save to the virtual file system and then copied to the shared folder. Also, VirtualBox inexplicably sets all text files it creates on the shared folder as *executable*, which looks weird.
+
+Instead, you can clone your GitHub account to both the virtual and host operating system filesystems. Then, push and pull as needed to transfer your entire project. As a bonus, you'll have regularly updated backups. Woot!
 
 ## Autosize the Desktop
 
@@ -374,6 +386,20 @@ NOTE: Permanently caching the student's GitHub credentials is very convenient bu
 	cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
 	# cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
 ```
+
+## Appendix C
+
+Here are some additional hints for using VirtualBox.
+
+* Go / exit full-screen by pressing RIGHT Control-f
+* Change your password in bash via **``passwd``**
+* Use View → AutoResize Display 
+* Manage your VMs like data
+    * Load as many VMs as you like, sharing a vdisk if desired – they don’t burn RAM unless they are running!
+    * Take snapshots occasionally, for more info see [the VirtualBox documentation](http://news.filehippo.com/2014/06/use-snapshot-virtualbox/)
+* NEVER close VirtualBox while a machine is running!
+    * This is like ripping the battery out of your laptop!
+    * Instead, shut down via ⏻ in the lower right corner, the Start menu, or bash’s **``sudo shutdown now``**
 
 
 
