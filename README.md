@@ -2,13 +2,19 @@
 
 This repository provides resources for recreating the CSE-VM virtual machine supporting some courses at the University of Texas at Arlington.
 
-This release is currently Alpha 2, and [is available for download](https://drive.google.com/file/d/1fkxUIS4-4vRFIjj4T3hh4kfzhwF844mH/view?usp=sharing) (3.8 GB, MD5 is b1af6a01ee3630f44603ef0c65943eca).
+This release is beta 1, and [is available for download](https://drive.google.com/file/d/1iGwht-xhYP8--0gsQhy5CJc4pWbX1FBX/view?usp=sharing) (4.0 GB, MD5 is 0f5882d183855fc2cf96efdfb0810a8e).
+
+After download and before importing, verify the MD5 checksum from your operating system's command line, shown below by host. **If the checksums do not match, the imported virtual machine will be unstable.** Download again, or obtain a valid copy from a known good source.
+
+* Linux:    **``md5sum cse-vm-3.0.ova``**
+* Mac OS X: **``md5 cse-vm-3.0.ova``**
+* Windows:  **``CertUtil -hashfile cse-vm-3.0.ova MD5``**
 
 ## Identification
 
 As of version 3.0, this virtual machine name is CSE-VM, and the release name is CSE-VM-3.0. 
 
-An instructor may customize this release by importing the .ova file into VirtualBox, making changes, and exporting a new .ova file, which should be named with the cource and section (and optional version) appended, e.g., CSE-VM-3.0-CSE1325-001.ova.
+An instructor may customize this release by importing the .ova file into VirtualBox, making changes, and exporting a new .ova file, which should be named with the course and section (and optional version) appended, e.g., CSE-VM-3.0-CSE1325-001.ova.
 
 Major version numbers correspond to the underlying Ubuntu Long Term Support (LTS) release: 1.x was built on Lubuntu 16.04, 2.x was built on Lubuntu 18.04, and 3.x is built on Xubuntu 20.04.
 
@@ -161,14 +167,24 @@ Xubuntu defaults to Mousepad, a perfectly reasonable Notepad equivalent. Some st
 
 1. Install the two gedit packages as a more capable replacement for mousepad as default editor: ``gedit gedit-plugins``
 2. Install Code::Blocks as an optional editor: ``codeblocks``
-2. Use this command to install Visual Studio Code as an optional editor, which can then be launched as ``code``: ``sudo snap install --classic code``
+3. Use this command to install Visual Studio Code as an optional editor, which can then be launched as ``code``: ``sudo snap install --classic code``
+4. Add the snap binary directory to PATH by adding the following lines to: ``gedit .profile``
+
+```
+# set PATH so it includes /snap/bin if it exists
+if [ -d "/snap/bin" ] ; then
+    PATH="/snap/bin:$PATH"
+fi
+```
 
 ## Development Package Installations
 
 4. Install the following package to provide developer documentation: ``devhelp``
 1. Install the following package to support C/C++ development: ``build-essential``
 2. Install the following packages to support C++ GUI development (the -doc versions add documentation to devhelp): ``libgtkmm-3.0-dev libgstreamermm-1.0-dev libgtkmm-3.0-doc libgstreamermm-1.0-doc``
-3. Install the following packages to support Java development (note: openjdk-14-jdk is now available, if preferred): ``openjdk-11-jdk``
+3. Install the following package to support Java development: ``openjdk-14-jdk``
+    1. Select Java 14 as default from the menu (it will likely report "only one alternative", which is success): ``sudo update-alternatives --config java``
+    2. Add JAVA_HOME to the environment by adding ``JAVA_HOME="/usr/lib/jvm/java-14-openjdk-amd64"`` to this file: ``sudo gedit /etc/environment``
 4. Python 3 is preinstalled, but install the following package to manage Python plug-ins: ``python3-pip``
 3. Install the following package to support debugging and profiling Linux programs: ``valgrind``
 2. Install the following package to support version control (or install ``git-all``, if a stand-alone GUI is also desired): ``git``
@@ -197,7 +213,6 @@ Add a .gitconfig to the home directory, i.e., ~/.gitconfig.  The content of this
 
 (NOTE: When git first launches, it will ask for the student's name and email and add them to .gitconfig.)
 
-
 ## Export
 
 Exporting the new virtual machine to a .ova file simplifies distribution to students.
@@ -213,7 +228,11 @@ Be sure the virtual machine is configured the way you want it to boot first for 
 
 Copy the text below into the student home directory of the virtual machine as file .bash_aliases. This file, along with the configuration documented above, adds the following bash commands to assist the students.
 
-* **e hello.cpp** – Opens the file(s) in each associated default editor (works with .pdf, .png, .jpg... all associated types!)
+* **e hello.cpp** – Opens the file(s) in each associated default editor (works with .pdf, .png, .jpg... all associated types!). Note that other editors may be invoked manually, e.g.,
+    * **vi hello.cpp** – Opens the file(s) in vim light (use ``sudo apt install vim`` for full vim)
+    * **gedit hello.cpp** – Opens the file(s) in gedit
+    * **code hello.cpp** – Opens the file(s) in Visual Studio Code
+    * **codeblocks hello.cpp** – Opens the file(s) in Code::Blocks
 * **eall** – Opens .h, .cpp, .java, .py, and Makefile in gedit.  Tabs are sorted by class name, 
 with each .h just to left of its .cpp, and with Makefile to the far right.
 * **ec class** – Opens class.h and class.cpp
