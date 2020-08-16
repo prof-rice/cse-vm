@@ -1,8 +1,10 @@
 # Creating CSE-VM-3.0
 
-This repository provides resources for recreating the CSE-VM virtual machine supporting some courses at the University of Texas at Arlington.
+This repository provides resources for recreating the CSE-VM virtual machine appliance supporting some courses at the University of Texas at Arlington.
 
 This release is beta 1, and [is available for download](https://drive.google.com/file/d/1iGwht-xhYP8--0gsQhy5CJc4pWbX1FBX/view?usp=sharing) (4.0 GB, MD5 is 0f5882d183855fc2cf96efdfb0810a8e).
+
+[A video is available](https://youtu.be/0dK8MEktWSk) to walk you through importing and running this virtual machine on your laptop or desktop computer.
 
 After download and before importing, verify the MD5 checksum from your operating system's command line, shown below by host. **If the checksums do not match, the imported virtual machine will be unstable.** Download again, or obtain a valid copy from a known good source.
 
