@@ -2,7 +2,7 @@
 
 This repository provides resources for recreating the CSE-VM virtual machine appliance supporting some courses at the University of Texas at Arlington.
 
-This release is beta 1, and [is available for download](https://drive.google.com/file/d/1iGwht-xhYP8--0gsQhy5CJc4pWbX1FBX/view?usp=sharing) (4.0 GB, MD5 is 0f5882d183855fc2cf96efdfb0810a8e).
+This release is production, and [is available for download](https://drive.google.com/file/d/1BQhZ-RLYCq_s4mZrIs0xWe7-ZQO_4ZIQ/) (4.0 GB, MD5 is b1a6f9aa63f927a4ab480359fc18761e).
 
 [A video is available](https://youtu.be/0dK8MEktWSk) to walk you through importing and running this virtual machine on your laptop or desktop computer.
 
@@ -85,7 +85,7 @@ In the VirtualBox menu, select Devices -> Shared Clipboard -> Bidirectional. Thi
 
 In Xubuntu, press Control-Alt-t to open a terminal.
 
-1. [Install the following package](#how-to-install-packages) to better integrate Xubuntu with the host system: **virtualbox-ext-pack**
+1. [Install the following packages](#how-to-install-packages) to better integrate Xubuntu with the host system: **virtualbox-ext-pack gnome-tweaks**
 2. Type the following command to reboot the virtual machine: **``sudo reboot``**
 3. In the VirtualBox menu, select View -> Autosize Display. This will resize the Xubuntu desktop to match the size of the window in which it is running.
 4. Reboot again, either with ``sudo reboot`` at the command line, or by clicking the start menu (upper left, with a mouse on it) -> power button -> Restart.
@@ -149,7 +149,7 @@ Install the following packages.
 1. Install the following packages to support the 'div' script: ``figlet boxes lolcat``
 3. Install the following package to support locating files anywhere by name fragment: ``mlocate``
 3. Install the following package to support searching PDFs, e.g., lecture notes: ``pdfgrep``
-4. Install the following package for quick screenshots: ``scrot``
+4. Install the following packages for quick screenshots: ``scrot gnome-screenshot``
 
 ## Manual Program Installations
 
