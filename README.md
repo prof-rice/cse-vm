@@ -2,7 +2,7 @@
 
 This repository provides resources for recreating the CSE-VM virtual machine appliance supporting some courses at the University of Texas at Arlington.
 
-This release is production, and [is available for download](https://drive.google.com/file/d/1BQhZ-RLYCq_s4mZrIs0xWe7-ZQO_4ZIQ/) (4.0 GB, MD5 is b1a6f9aa63f927a4ab480359fc18761e).
+This release is production, and is available from sources on the UTA network. Please ask your professor for the link. (4.0 GB, MD5 is b1a6f9aa63f927a4ab480359fc18761e)
 
 [A video is available](https://youtu.be/0dK8MEktWSk) to walk you through importing and running this virtual machine on your laptop or desktop computer.
 
@@ -155,10 +155,11 @@ Install the following packages.
 
 A few executables are not available in the system repository, but can be added to the /home/student/bin directory. NOTE: Ubuntu will automatically detect this directory and add it to the student's path each time bash is launched.
 
-3. Create directory ~/bin using this bash command: ``mkdir ~/bin``  
-4. Add the [following executable](https://the.exa.website/install) to bin to support the lt and lx directory listers: ``exa``
-5. Add the [following JAR file](https://plantuml.com/download) to bin to support UML diagram generation: ``plantuml.jar``
-6. Add the following script to bin to run Plant UML as an executable (use ``chmod a+x plantuml`` to make it executable): ``plantuml``
+1. Create directory ~/bin using this bash command: ``mkdir ~/bin``  
+2. Add the [following executable](https://the.exa.website/install) to bin to support the lt and lx directory listers: ``exa``
+3. Add the [following JAR file](https://plantuml.com/download) to bin to support UML diagram generation: ``plantuml.jar``
+4. Install the following GraphViz package, on which PlantUML relies: ``graphviz``
+5. Add the following script to bin to run Plant UML as an executable (use ``chmod a+x plantuml`` to make it executable): ``plantuml``
 
          #!/usr/bin/env bash
          /usr/bin/java -jar /home/student/bin/plantuml.jar $@
