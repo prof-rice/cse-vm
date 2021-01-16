@@ -4,7 +4,7 @@
 alias doc='cd ~/Documents/'
 alias dl='cd ~/Downloads/'
 alias dev='cd ~/cse1325/'           # Set to your development repository
-alias prof='cd ~/dev/cse1325-prof'  # Set to your professor's repository
+alias prof='cd ~/cse1325-prof/'     # Set to your professor's repository
 
 # #############
 # Edit commands
@@ -17,9 +17,16 @@ export EDITOR=gedit
 e() {
  for file in "$@" ; do
     if [ ! -f "$file" ]; then
-      touch "$file"
+      echo " " >> "$file"
     fi
-    xdg-open "$file"
+    # work-around for interation bug between xdg-open and gedit
+    fn=$(basename -- "$file")
+    ext="${fn##*.}"
+    if [[ "$ext" =~ ^(h|cpp|java|py|txt)$ ]]; then 
+        gedit "$file" &> /dev/null
+    else
+        xdg-open "$file"
+    fi
   done
 }
 
@@ -29,7 +36,7 @@ ec () {
 }
 
 # Open all C++  (header then body), Java, and Python class files in alphabetical order, followed by Makefile
-alias eall='shopt -s nullglob ; setsid gedit $(ls -1 *.h *.cpp *.java *.py | sort -t. -k1,1 -k2,2r) Makefile* makefile* ; shopt -u nullglob'
+alias eall='shopt -s nullglob ; setsid gedit $(ls -1 *.h *.hpp *.c *.cpp *.java *.py | sort -t. -k1,1 -k2,2r) Makefile* makefile* ; shopt -u nullglob'
 
 # #########
 # EXA setup
@@ -103,4 +110,6 @@ cloc-delta() {
 # ########################
 # Fix retext configuration
 QT_STYLE_OVERRIDE="fusion"
+
+
 

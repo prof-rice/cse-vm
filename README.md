@@ -1,22 +1,22 @@
-# Creating CSE-VM-3.0
+# Creating CSE-VM-3.1
 
 This repository provides resources for recreating the CSE-VM virtual machine appliance supporting some courses at the University of Texas at Arlington.
 
-This release is production, and is available from sources on the UTA network. Please ask your professor for the link. (4.0 GB, MD5 is b1a6f9aa63f927a4ab480359fc18761e)
+This release is production, and is available from sources on the UTA network. Please ask your professor for the link. (3.8 GB, MD5 is 5c47ed9f4976f5fb2cda06e5e2eceb06)
 
 [A video is available](https://youtu.be/0dK8MEktWSk) to walk you through importing and running this virtual machine on your laptop or desktop computer.
 
 After download and before importing, verify the MD5 checksum from your operating system's command line, shown below by host. **If the checksums do not match, the imported virtual machine will be unstable.** Download again, or obtain a valid copy from a known good source.
 
-* Linux:    **``md5sum cse-vm-3.0.ova``**
-* Mac OS X: **``md5 cse-vm-3.0.ova``**
-* Windows:  **``CertUtil -hashfile cse-vm-3.0.ova MD5``**
+* Linux:    **``md5sum cse-vm-3.1.2.ova``**
+* Mac OS X: **``md5 cse-vm-3.1.2.ova``**
+* Windows:  **``CertUtil -hashfile cse-vm-3.1.2.ova MD5``**
 
 ## Identification
 
-As of version 3.0, this virtual machine name is CSE-VM, and the release name is CSE-VM-3.0. 
+As of version 3.1.2, this virtual machine name is CSE-VM, and the release name is CSE-VM-3.1.2. 
 
-An instructor may customize this release by importing the .ova file into VirtualBox, making changes, and exporting a new .ova file, which should be named with the course and section (and optional version) appended, e.g., CSE-VM-3.0-CSE1325-001.ova.
+An instructor may customize this release by importing the .ova file into VirtualBox, making changes, and exporting a new .ova file, which should be named with the course and section (and optional version) appended, e.g., CSE-VM-3.1.2-CSE1325-001.ova.
 
 Major version numbers correspond to the underlying Ubuntu Long Term Support (LTS) release: 1.x was built on Lubuntu 16.04, 2.x was built on Lubuntu 18.04, and 3.x is built on Xubuntu 20.04.
 
@@ -26,6 +26,10 @@ Minor version numbers indicate the semester for which that virtual machine is in
 
 ## Configure Host System
 
+To use this release, install VirtualBox and use File > Import Appliance, specifying the downloaded CSE-VM-3.1.2.ova file.
+
+The process to rebuild this release from publicly available packages is detailed starting here.
+
 This release of CSE-VM is built on an x64 Ubuntu 20.04 host system, although a Windows 10 or Mac OS X host should work as well. This release has been tested under Ubuntu 20.04 and Windows 10.
 
 1. Install the latest version of Oracle VirtualBox from [the VirtualBox website](https://www.virtualbox.org/). 
@@ -34,17 +38,17 @@ This release of CSE-VM is built on an x64 Ubuntu 20.04 host system, although a W
 
 NOTE: Oracle changes the VirtualBox interface regularly. These instructions are based on VirtualBox 6.1.6_Ubuntu r137129.
 
-[Download Xubuntu 20.04](https://xubuntu.org/download/). The filename should be xubuntu-20.04-desktop-amd64.iso, and is close to 2 GB in size.
+[Download Xubuntu 20.04](https://xubuntu.org/download/). The filename should be xubuntu-20.04-desktop-amd64.iso, and is close to 2 GB in size. (NOTE: Pre-patched releases are occasionally made, so use e.g., 20.04.1 if available.)
 
 1. Launch VirtualBox.
 2. Select Machine -> New...
 3. In the Create Virtual Machine dialog, select a name (see [Identification](#identification)) and set Type to Linux, Version to Ubuntu (64-bit), Memory Size to 2048 MB, and Hard Disk to Create a Virtual Hard Disk Now. Click Create.
-4. In the Create Virtual Hard Disk dialog, set File Size to 10 GB, File Type to VDI, and Storage to Dynamically Allocated. Click Create. You should see your new VM in the list in the VirtualBox Manager main window, marked as Powered Off.
+4. In the Create Virtual Hard Disk dialog, set File Size to at least 15 GB, File Type to VDI, and Storage to Dynamically Allocated. Click Create. You should see your new VM in the list in the VirtualBox Manager main window, marked as Powered Off.
 5. Select your new VM and click Settings. Accept all defaults except for the following changes.
     * Under General -> Advanced, enable Shared Clipboard.
     * Under Display -> Screen, set Video Memory to 128 MB and Video Controller to VBoxSVGA. Ignore the warning about the video configuration; this is the correct configuration.
-    * Under Storage -> Storage Devices -> Controller:IDE, select Empty. Click the CD icon under Attributes and select Choose a Disk File. Select xubuntu-20.04-desktop-amd64.iso from the host file system.
-6. Accept the Settings changes, then click Start to launch the new virtual machine. In the Select Start-up Disk dialog, select xubuntu-20.04-desktop-amd64.iso. Click Start. You should see the Xubuntu logo and some scrolling status messages as the operating system boots into the virtual machine. Patience.
+    * Under Storage -> Storage Devices -> Controller:IDE, select Empty. Click the CD icon under Attributes and select Choose a Disk File. Select xubuntu-20.04-desktop-amd64.iso (or a later patch release) from the host file system.
+6. Accept the Settings changes, then click Start to launch the new virtual machine. In the Select Start-up Disk dialog, select xubuntu-20.04-desktop-amd64.iso (or a later patch release). Click Start. You should see the Xubuntu logo and some scrolling status messages as the operating system boots into the virtual machine. Patience.
 7. Xubuntu will be running directly from the .iso file for now. 
     * At the welcome screen that should open automatically, select English and then click Install Xubuntu. 
     * Click Continue to accept the default keyboard layout.
@@ -140,7 +144,7 @@ Configure Xubuntu to open the start menu with the Super key (called the Windows 
 3. Type ``xfce4-popup-whiskermenu`` as the command, deselect "Use Startup Notification", and click OK.
 4. When prompted, press Super (the key with the Windows logo on it).
 
-If you look through the list, you'll see ``xfce4-popup-whiskermenu`` in the alphabetized Command column, with ``Super L`` associated with it in the Shortcut column.
+If you look through the list, you should see ``xfce4-popup-whiskermenu`` in the alphabetized Command column, with ``Super L`` associated with it in the Shortcut column. If not, retrace the above steps in this section more carefully.
 
 ## Usability Package Installations
 
@@ -169,9 +173,11 @@ A few executables are not available in the system repository, but can be added t
 Xubuntu defaults to Mousepad, a perfectly reasonable Notepad equivalent. Some students want... more.
 
 1. Install the two gedit packages as a more capable replacement for mousepad as default editor: ``gedit gedit-plugins``
-2. Install Code::Blocks as an optional editor: ``codeblocks``
-3. Use this command to install Visual Studio Code as an optional editor, which can then be launched as ``code``: ``sudo snap install --classic code``
-4. Add the snap binary directory to PATH by adding the following lines to: ``gedit .profile``
+2. Open gedit by typing ``gedit``. Click gear > Preferences > Editor. Disable "Use spaces insead of tabs" (required to edit a Makefile). Close gedit.
+3. Install Code::Blocks as an optional editor: ``codeblocks``
+4. Use this command to install Visual Studio Code as an optional editor, which can then be launched as ``code``: ``sudo snap install --classic code``
+5. Select Start > Settings > MIME Type Editor. For source code types text/x-c++hdr, text/x-c++src, text/x-java, and text/x-python, double-click the Default Application cell and select Text Editor (this is gedit).
+5. Add the snap binary directory to PATH by adding the following lines to: ``gedit .profile``
 
 ```
 # set PATH so it includes /snap/bin if it exists
@@ -182,17 +188,17 @@ fi
 
 ## Development Package Installations
 
-4. Install the following package to provide developer documentation: ``devhelp``
-1. Install the following package to support C/C++ development: ``build-essential``
-2. Install the following packages to support C++ GUI development (the -doc versions add documentation to devhelp): ``libgtkmm-3.0-dev libgstreamermm-1.0-dev libgtkmm-3.0-doc libgstreamermm-1.0-doc``
-3. Install the following package to support Java development: ``openjdk-14-jdk``
+1. Install the following package to provide developer documentation: ``devhelp``
+2. Install the following package to support C/C++ development: ``build-essential``
+3. Install the following packages to support C++ GUI development (the -doc versions add documentation to devhelp): ``libgtkmm-3.0-dev libgstreamermm-1.0-dev libgtkmm-3.0-doc libgstreamermm-1.0-doc``
+4. Install the following package to support Java development: ``openjdk-14-jdk``
     1. Select Java 14 as default from the menu (it will likely report "only one alternative", which is success): ``sudo update-alternatives --config java``
     2. Add JAVA_HOME to the environment by adding ``JAVA_HOME="/usr/lib/jvm/java-14-openjdk-amd64"`` to this file: ``sudo gedit /etc/environment``
-4. Python 3 is preinstalled, but install the following package to manage Python plug-ins: ``python3-pip``
-3. Install the following package to support debugging and profiling Linux programs: ``valgrind``
-2. Install the following package to support version control (or install ``git-all``, if a stand-alone GUI is also desired): ``git``
-3. Install the following package to support visual differencing and merging: ``meld``
-5. Install the following package to support counting lines of code: ``cloc``
+5. Python 3 is preinstalled, but install the following package to manage Python plug-ins: ``python3-pip``
+6. Install the following package to support debugging and profiling Linux programs: ``valgrind``
+7. Install the following package to support version control (or install ``git-all``, if a stand-alone GUI is also desired): ``git``
+8. Install the following package to support visual differencing and merging: ``meld``
+9. Install the following package to support counting lines of code: ``cloc``
 
 ## Update .bashrc
 
@@ -206,15 +212,28 @@ with
 
 ## Add .bash_aliases
 
-Add a .bash_aliases to the home directory, i.e., ~/.bash_aliases.  The content of this file is provided in Appendix A, and also in this repository as bash_aliases (note the missing leading dot, which you must add after copying). It may be tweaked by a competent bash developer, or by students after importing the appliance. 
+Add a .bash_aliases to the home directory, i.e., ~/.bash_aliases.  The content of this file is in this repository as bash_aliases (note the missing leading dot, which you must add after copying). It may be tweaked by a competent bash developer, or by students after importing the appliance. 
 
 (NOTE: When bash launches, the .bashrc script is run, and it will automatically execute .bash_aliases if it exists.)
 
 ## Add .gitconfig
 
-Add a .gitconfig to the home directory, i.e., ~/.gitconfig.  The content of this file is provided in Appendix B, and also in this repository as gitconfig (note the missing leading dot, which you must add after copying). It may be tweaked by a competent git guru, or by students after importing the appliance. 
+Add a .gitconfig to the home directory, i.e., ~/.gitconfig.  The content of this file is provided in this repository as gitconfig (note the missing leading dot, which you must add after copying). It may be tweaked by a competent git guru, or by students after importing the appliance. 
 
 (NOTE: When git first launches, it will ask for the student's name and email and add them to .gitconfig.)
+
+## Reduce the size of the OVA file
+
+The end of following article offers more comprehensive advice on reducing the size of an OVA file.
+
+https://technology.amis.nl/platform-technology/virtualization-and-oracle-vm/ubuntu-vm-virtualbox-increase-size-disk-make-smaller-exports-distribution/
+
+The following simpler process reduces the size by about 5%.
+
+1. Install BleachBit: ``sudo apt install bleachbit``
+2. Run BleachBit as root: ``sudo bleachbit``
+3. Enable every option except System > Memory
+4. Click Clean. This may take awhile, so prepare and drink your favorite beverage.
 
 ## Export
 
@@ -224,12 +243,12 @@ Be sure the virtual machine is configured the way you want it to boot first for 
 
 1. In the VirtualBox main window select File -> Export Appliance. 
 2. Select the OVF 1.0 format and click Next. 
-3. Complete the product information. Note that if any license is specified, then the students will be asked to accept that license. 
+3. Complete the product information. Do NOT specify a license. (Note that if any license is specified, then the students will be asked to accept that license.)
 4. Click Export. This may take some time. Patience.
 
 ## Appendix A
 
-Copy the text below into the student home directory of the virtual machine as file .bash_aliases. This file, along with the configuration documented above, adds the following bash commands to assist the students.
+Copy the ``bash_aliases`` file into the student home directory of the virtual machine as file .bash_aliases. This file, along with the configuration documented above, adds the following bash commands to assist the students.
 
 * **e hello.cpp** – Opens the file(s) in each associated default editor (works with .pdf, .png, .jpg... all associated types!). Note that other editors may be invoked manually, e.g.,
     * **vi hello.cpp** – Opens the file(s) in vim light (use ``sudo apt install vim`` for full vim)
@@ -260,153 +279,17 @@ with each .h just to left of its .cpp, and with Makefile to the far right.
 * **meld** – Compares and merges files visually, particularly helpful with git merges
 * **valgrind** – Supports debugging and profiling Linux applications
 
----
-
-```
-# #####################################################
-# File system bookmarks (add other aliases as required)
-
-alias doc='cd ~/Documents/'
-alias dl='cd ~/Downloads/'
-alias dev='cd ~/cse1325/'           # Set to your development repository
-alias prof='cd ~/dev/cse1325-prof'  # Set to your professor's repository
-
-# #############
-# Edit commands
-
-# The EDITOR environment sets the default text editor for most text files
-# Change this to your favorite editor, e.g., mousepad, nano, vi, etc
-export EDITOR=gedit
-
-# Open file(s) using the associated application, creating the file if it doesn't exist
-e() {
- for file in "$@" ; do
-    if [ ! -f "$file" ]; then
-      touch "$file"
-    fi
-    xdg-open "$file"
-  done
-}
-
-# Open the header and body of a C++ class
-ec () {
-  e $1.h $1.cpp
-}
-
-# Open all C++  (header then body), Java, and Python class files in alphabetical order, followed by Makefile
-alias eall='shopt -s nullglob ; setsid gedit $(ls -1 *.h *.cpp *.java *.py | sort -t. -k1,1 -k2,2r) Makefile* makefile* ; shopt -u nullglob'
-
-# #########
-# EXA setup
-alias lx='exa -lh --git --time-style iso'
-alias lt='exa -lhT --level 3 --git --time-style iso'
-export EXA_COLORS="da=1;34"
-
-# ######################
-# Miscellaneous commands
-
-# Type 'backup' to duplicate current directory to time-stamped peer directory with optional tag (eg, -P01)
-backup () {
-  DIR=../$(basename $PWD)-$(date +%Y%m%d-%H%M%S)${1}
-  mkdir -p $DIR
-  cp -ru . $DIR
-}
-
-# enable mkcd to create and change to a new path
-mkcd () {
-  case "$1" in /*) :;; *) set -- "./$1";; esac
-  mkdir -p "$1" && cd "$1"
-}
-
-# easier-to-read path command
-paths() {
-  echo $PATH | sed 's/:/\n/g'
-}
-
-# search hierarchy of PDF files
-pdfgreps() {
-  find . -iname '*.pdf' -exec pdfgrep $1 {} +
-}
-
-# ######################
-# C++ build enhancements
-#
-
-# Quickie C++ 17 compiles
-alias c17='g++ --std=c++17'
-g17() {
-  c17 "$@" `/usr/bin/pkg-config gtkmm-3.0 --cflags --libs`
-}
-
-# build divider (with a customizable message)
-div() {
-  default_msg="Starting a Build"
-  msg="s='${1:-$default_msg}';print(s.center(31))"
-  (python3 -c "$msg" ; echo $(date)) | boxes -p h4v2 -d ian_jones | lolcat
-}
-
-# notification e.g., that build is complete
-notify() {
-  result=$?
-  notify-send -i $([ "$result" = 0 ] && echo info || echo error) "$@"
-  (echo $([ "$result" = 0 ] && echo "success:" || echo "failed: ") "$@" | espeak &) > /dev/null 2>&1
-  return $result
-}
-
-# enhanced make command
-m() {
-  div
-  make -j12 "$@"
-  notify build complete
-}
-
-# roughly calculate changes from a previous iteration
-cloc-delta() {
-  for f in *.h *.cpp Makefile ; do diff $f $1; done | grep '<' | wc
-}
-
-# ########################
-# Fix retext configuration
-QT_STYLE_OVERRIDE="fusion"
-
-```
+> In XUbuntu 20.04, xdg-open inexplicably fails to launch gedit. Therefore, the e() function in this file has special code to detect key files and open them directly in gedit. This code is a work-around, and should be removed once Canonical fixes this bug.
 
 ## Appendix B
 
-Copy the text below into the student home directory of the virtual machine as file .gitconfig, or download gitconfig from the repository and rename it. This file preconfigures git to operate conveniently, with colorful output, caching the GitHub credentials, setting difftool and mergetool to use meld, and adding a couple of aliases.
+Copy the ``gitconfig`` file into the student home directory of the virtual machine as file .gitconfig. This file preconfigures git to operate conveniently, with colorful output, caching the GitHub credentials, setting difftool and mergetool to use meld, and adding a couple of aliases.
 
 NOTE: Permanently caching the student's GitHub credentials is very convenient but assumes the student's laptop is protected, as these credentials are stored as a plain text file in the VM. To save the credentials only in memory and for a limited time (in this case, 8 hours), replace the credentials section with:
 
 ```
 [credential]
     helper = cache --timeout 28800
-```
-
----
-
-```
-[color]
-	ui = auto
-[alias]
-	logline = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-
-	lg = !"git branches"
-[push]
-	default = simple
-[credential]
-	helper = store
-[diff]
-	tool = meld
-[difftool]
-	prompt = false
-[difftool "meld"]
-	cmd = meld "$LOCAL" "$REMOTE"
-[merge]
-	tool = meld
-[mergetool "meld"]
-	# Choose one of these 2 lines (not both!)
-	cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
-	# cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
 ```
 
 ## Appendix C
