@@ -1,61 +1,61 @@
-# Creating CSE-VM-3.1
+# Creating CSE-VM-3.3
 
 This repository provides resources for recreating the CSE-VM virtual machine appliance supporting some courses at the University of Texas at Arlington.
 
-This release is production, and is available from sources on the UTA network. Please ask your professor for the link. (3.8 GB, MD5 is 5c47ed9f4976f5fb2cda06e5e2eceb06)
+This release is production, and is available from sources on the UTA network. Please ask your professor for the link.
+
+After download this 3.0 GB file and before importing, verify the MD5 checksum from your operating system's command line, shown below by host. **If the checksums do not match, the imported virtual machine will be unstable.** Download again, or obtain a valid copy from a known good source. The MD5 checksum is
+
+> 395fb2c021f09ca75befe32e276c037c  cse-vm-3.3.0.ova
+
+* Linux:    **``md5sum cse-vm-3.3.0.ova``**
+* Mac OS X: **``md5 cse-vm-3.3.0.ova``**
+* Windows:  **``CertUtil -hashfile cse-vm-3.3.0.ova MD5``**
 
 [A video is available](https://youtu.be/0dK8MEktWSk) to walk you through importing and running this virtual machine on your laptop or desktop computer.
 
-After download and before importing, verify the MD5 checksum from your operating system's command line, shown below by host. **If the checksums do not match, the imported virtual machine will be unstable.** Download again, or obtain a valid copy from a known good source.
-
-* Linux:    **``md5sum cse-vm-3.1.2.ova``**
-* Mac OS X: **``md5 cse-vm-3.1.2.ova``**
-* Windows:  **``CertUtil -hashfile cse-vm-3.1.2.ova MD5``**
-
 ## Identification
 
-As of version 3.1.2, this virtual machine name is CSE-VM, and the release name is CSE-VM-3.1.2. 
+As of version 3.3.0, this virtual machine name is CSE-VM, and the release name is CSE-VM-3.3.0. 
 
-An instructor may customize this release by importing the .ova file into VirtualBox, making changes, and exporting a new .ova file, which should be named with the course and section (and optional version) appended, e.g., CSE-VM-3.1.2-CSE1325-001.ova.
+An instructor may customize this release by importing the .ova file into VirtualBox, making changes, and exporting a new .ova file, which should be named with the course and section (and optional version) appended, e.g., cse-vm-3.3.0-CSE1325-001.ova.
 
 Major version numbers correspond to the underlying Ubuntu Long Term Support (LTS) release: 1.x was built on Lubuntu 16.04, 2.x was built on Lubuntu 18.04, and 3.x is built on Xubuntu 20.04.
-
-> The switch to Xubuntu reflects the rewrite of the LDXE desktop on which Lubuntu is built, from Gtk+ to Qt, leading to concern over possible stability issues. Xfce, on which Xubuntu is based, is Gtk+ based (currently used for CSE1325), lightweight, and stable.
 
 Minor version numbers indicate the semester for which that virtual machine is intended. 3.0 indicates fall of 2020, 3.1 spring of 2021, 3.2 fall of 2021, and 3.3 spring of 2022. Fall of 2022 will then move to the next LTS release, 22.04, as version 4.0, with whatever desktop seems most advantageous at that time.
 
 ## Configure Host System
 
-To use this release, install VirtualBox and use File > Import Appliance, specifying the downloaded CSE-VM-3.1.2.ova file.
+To use this release, install VirtualBox and use File > Import Appliance, specifying the downloaded cse-mv-3.3.0.ova file.
 
 The process to rebuild this release from publicly available packages is detailed starting here.
 
-This release of CSE-VM is built on an x64 Ubuntu 20.04 host system, although a Windows 10 or Mac OS X host should work as well. This release has been tested under Ubuntu 20.04 and Windows 10.
+This release of CSE-VM is built on an x64 Ubuntu 21.10 host system, although a Windows 10 or Mac OS X host should work as well. This release has been tested under Ubuntu 21.10 and Windows 10.
 
 1. Install the latest version of Oracle VirtualBox from [the VirtualBox website](https://www.virtualbox.org/). 
 
 ## Create a Xubuntu 20.04 Virtual Machine
 
-NOTE: Oracle changes the VirtualBox interface regularly. These instructions are based on VirtualBox 6.1.6_Ubuntu r137129.
+NOTE: Oracle changes the VirtualBox interface regularly. These instructions are based on VirtualBox 6.1.26_Ubuntu r145957.
 
-[Download Xubuntu 20.04](https://xubuntu.org/download/). The filename should be xubuntu-20.04-desktop-amd64.iso, and is close to 2 GB in size. (NOTE: Pre-patched releases are occasionally made, so use e.g., 20.04.1 if available.)
+[Download Xubuntu 20.04](https://xubuntu.org/download/). The filename should be xubuntu-20.04-desktop-amd64.iso, and is close to 2 GB in size. (NOTE: Pre-patched releases are occasionally made, so use e.g., 20.04.3 or later if available, e.g., xubuntu-20.04.3-desktop-amd64.iso.)
 
 1. Launch VirtualBox.
 2. Select Machine -> New...
 3. In the Create Virtual Machine dialog, select a name (see [Identification](#identification)) and set Type to Linux, Version to Ubuntu (64-bit), Memory Size to 2048 MB, and Hard Disk to Create a Virtual Hard Disk Now. Click Create.
-4. In the Create Virtual Hard Disk dialog, set File Size to at least 15 GB, File Type to VDI, and Storage to Dynamically Allocated. Click Create. You should see your new VM in the list in the VirtualBox Manager main window, marked as Powered Off.
+4. In the Create Virtual Hard Disk dialog, set File Type to VDI, Storage to Dynamically Allocated, and File Size to at least 20 GB. Click Create. You should see your new VM in the list in the VirtualBox Manager main window, marked as Powered Off.
 5. Select your new VM and click Settings. Accept all defaults except for the following changes.
-    * Under General -> Advanced, enable Shared Clipboard.
-    * Under Display -> Screen, set Video Memory to 128 MB and Video Controller to VBoxSVGA. Ignore the warning about the video configuration; this is the correct configuration.
-    * Under Storage -> Storage Devices -> Controller:IDE, select Empty. Click the CD icon under Attributes and select Choose a Disk File. Select xubuntu-20.04-desktop-amd64.iso (or a later patch release) from the host file system.
+   * Under General -> Advanced, set both Shared Clipboard and Drag'n'Drop to Bidirectional.
+   * Under Display -> Screen, set Video Memory to 128 MB and Video Controller to VBoxSVGA. Ignore the warning about the video configuration; this is the correct configuration.
+   * Under Storage -> Storage Devices -> Controller:IDE, select Empty. Click the CD icon under Attributes and select Choose a Disk File. Select xubuntu-20.04-desktop-amd64.iso (or a later patch release) from the host file system.
 6. Accept the Settings changes, then click Start to launch the new virtual machine. In the Select Start-up Disk dialog, select xubuntu-20.04-desktop-amd64.iso (or a later patch release). Click Start. You should see the Xubuntu logo and some scrolling status messages as the operating system boots into the virtual machine. Patience.
 7. Xubuntu will be running directly from the .iso file for now. 
-    * At the welcome screen that should open automatically, select English and then click Install Xubuntu. 
-    * Click Continue to accept the default keyboard layout.
-    * Enable both Download Updates and Install Third-Party Software and click Continue.
-    * Select Erase Disk and Install Xubuntu (this is your virtual disk, NOT your host's disk!) and click Install Now and then Continue. Installation will begin in a background process.
-    * Select Arlington, Texas as the current location and click Continue.
-    * Set Your Name to Student, Computer's Name to Maverick, username and password both to student, enable Log In Automatically, and click Continue. Installation will continue in the foreground. This may take some time. Patience.
+   * At the welcome screen that should open automatically, select English and then click Install Xubuntu. 
+   * Click Continue to accept the default keyboard layout.
+   * Enable both Download Updates and Install Third-Party Software and click Continue.
+   * Select Erase Disk and Install Xubuntu (this is your virtual disk, NOT your host's disk!) and click Install Now and then Continue. Installation will begin in a background process.
+   * Select Arlington, Texas as the current location and click Continue.
+   * Set Your Name to Student, Computer's Name to Maverick, username and password both to student, enable Log In Automatically, and click Continue. Installation will continue in the foreground. This may take some time. Patience.
 8. Once installation completes, click Restart Now. Press Enter when prompted to remove the media (this is automatic in a virtual machine). 
 
 Once rebooted, the virtual machine is ready for configuration. If the virtual machine asks for media in the future, select Host Drive. To prevent this, with the virtual machine off, select the virtual machine in the VirtualBox main window, click Settings -> Storage, click the CD icon, and select Remove Disk from Virtual Drive.
@@ -91,7 +91,7 @@ In Xubuntu, press Control-Alt-t to open a terminal.
 
 1. [Install the following packages](#how-to-install-packages) to better integrate Xubuntu with the host system: **virtualbox-ext-pack gnome-tweaks**
 2. Type the following command to reboot the virtual machine: **``sudo reboot``**
-3. In the VirtualBox menu, select View -> Autosize Display. This will resize the Xubuntu desktop to match the size of the window in which it is running.
+3. In the VirtualBox menu, enable View -> Auto-resize Guest Display (if the box is not checked, click it - if checked, do NOT click it). This will resize the Xubuntu desktop to match the size of the window in which it is running.
 4. Reboot again, either with ``sudo reboot`` at the command line, or by clicking the start menu (upper left, with a mouse on it) -> power button -> Restart.
 
 ## Configure the Panel
@@ -102,26 +102,26 @@ Xubuntu supports multiple panels (one of which Windows sometimes calls the "task
 2. Drag the panel to the bottom, using the newly visible "friction pad" on the far left. 
 3. Right-click the start menu (now in the lower right corner, where students will expect it) and select Panel -> Panel Preferences. Select "Lock Panel". Don't click Close yet!
 4. In the Appearance tab, Icons section, enable Adjust Size Automatically. Under Opacity, set both Enter and Leave to 100%.
-5. In the Items tab, configure the following items. To add an item, click the green +, select it from the list, and click +Add. After adding an item, select it and click the gear icon on the right to configure it. To configure a Launcher, click the green + to select an installed application from the list as specified.
-    * **Whisker Menu:** The defaults should be fine. Changing Panel Button -> Display to Icon and Title, and setting the Title to Start, may be more intuitive for Windows users.
-    * **Launcher - Firefox**
-    * **Launcher - Terminal Emulator**
-    * **Launcher - File Manager:** This is Thunar
-    * **Launcher - Text Editor:** This is Gedit
-    * **Screenshot**: This is gnome-screenshot, not scrot
-    * **Separator** x2: This is near the top of the Add New Items list, just below Launcher. Add 2.
-    * **Window Buttons**
-    * **Separator**
-    * **Notification Area**
-    * **Indicator Plugin**
-    * **Status Notifier Plugin**
-    * **PulseAudio Plugin**
-    * **Separator**
-    * **System Load Monitor:** Set Monitor to xfce-taskmanager. Set Update Interval to 0.5 seconds, Power-Saving Interval is 1 second. Enable all 4 monitors, with Options set to cpu, mem, and swap (uptime supports no Options). 
-    * **Separator**
-    * **Clock**
-    * **Separator**
-    * **Action Buttons:** Shutdown with "Show Confirmation Dialog"
+5. In the Items tab, configure the following items. To add an item, click the green +, select it from the list, and click +Add - it will be immediately added to the panel. After adding an item, select it and click the gear icon on the right to configure it. To configure a Launcher, right-click the panel button with the red ⍉ and select Properties, then click the green + to select an installed application from the list as specified. To move an item to another place on the panel, right-click it and select Move, reposition with the mouse, and click.
+   * **Whisker Menu:** The defaults should mostly be fine. On the Panel Button tab, change Display to Icon and Title and set the Title to "Start", to be more intuitive for Windows users. On the Commands tab, disable Log Out... and enable "Shut Down..."
+   * **Launcher - Firefox**
+   * **Launcher - Terminal Emulator**
+   * **Launcher - File Manager:** This is Thunar
+   * **Launcher - Text Editor:** This is Gedit
+   * **Screenshot**: This is gnome-screenshot, not scrot
+   * **Separator** x2: This is near the top of the Add New Items list, just below Launcher. Add 2.
+   * **Window Buttons**
+   * **Separator**
+   * **Notification Area**
+   * **Indicator Plugin**
+   * **Status Notifier Plugin**
+   * **PulseAudio Plugin**
+   * **Separator**
+   * **System Load Monitor:** Set Monitor to xfce-taskmanager. Set Update Interval to 0.5 seconds, Power-Saving Interval is 1 second. Enable all 4 monitors, with Options set to cpu, mem, and swap (uptime supports no Options). 
+   * **Separator**
+   * **Clock**
+   * **Separator**
+   * **Action Buttons:** Shutdown with "Show Confirmation Dialog"
 6. Click Close now!
 
 ## Set the Wallpaper
@@ -137,7 +137,7 @@ Set a distinctive wallpaper to clearly indicate the window running the virtual m
 
 ## Open the menu on Super
 
-Configure Xubuntu to open the start menu with the Super key (called the Windows key for Windows 10), since this is familiar behavior to Windows users.
+Configure Xubuntu to open the start menu with the Super key (called the Windows key for Windows 11), since this is familiar behavior to Windows users.
 
 1. Select the start menu -> Settings -> Keyboard -> Application Shortcuts.
 2. Click Add.
@@ -151,33 +151,40 @@ If you look through the list, you should see ``xfce4-popup-whiskermenu`` in the 
 Install the following packages.
 
 1. Install the following packages to support the 'div' script: ``figlet boxes lolcat``
-3. Install the following package to support locating files anywhere by name fragment: ``mlocate``
-3. Install the following package to support searching PDFs, e.g., lecture notes: ``pdfgrep``
-4. Install the following packages for quick screenshots: ``scrot gnome-screenshot``
+2. Install the following package to support searching PDFs, e.g., lecture notes: ``pdfgrep``
+3. Install the following packages for quick screenshots from bash: ``scrot``
+
+If the ``locate`` command doesn't work, also install ``mlocate`` (it was pre-installed with XUbuntu 20.04.3, however).
 
 ## Manual Program Installations
 
 A few executables are not available in the system repository, but can be added to the /home/student/bin directory. NOTE: Ubuntu will automatically detect this directory and add it to the student's path each time bash is launched.
 
 1. Create directory ~/bin using this bash command: ``mkdir ~/bin``  
-2. Add the [following executable](https://the.exa.website/install) to bin to support the lt and lx directory listers: ``exa``
-3. Add the [following JAR file](https://plantuml.com/download) to bin to support UML diagram generation: ``plantuml.jar``
-4. Install the following GraphViz package, on which PlantUML relies: ``graphviz``
-5. Add the following script to bin to run Plant UML as an executable (use ``chmod a+x plantuml`` to make it executable): ``plantuml``
 
+2. Add the [following executable](https://the.exa.website/install) to bin to support the lt and lx directory listers: ``exa``
+
+3. Add the [following JAR file](https://plantuml.com/download) to bin to support UML diagram generation: ``plantuml.jar``
+
+4. Install the following GraphViz package, on which PlantUML relies: ``graphviz``
+
+5. Add the following script to bin to run Plant UML as an executable (use ``chmod a+x plantuml`` to make it executable): ``plantuml``
+   
          #!/usr/bin/env bash
          /usr/bin/java -jar /home/student/bin/plantuml.jar $@
+
+Note that XUbuntu includes an older version (by about 3 years) of PlantUML in the repository. While not recommended, it may be used in place of downloading the latest plantuml.jar and creating the plantuml script by instead installing ``plantuml``.
 
 ## Popular Editor Installations
 
 Xubuntu defaults to Mousepad, a perfectly reasonable Notepad equivalent. Some students want... more.
 
 1. Install the two gedit packages as a more capable replacement for mousepad as default editor: ``gedit gedit-plugins``
-2. Open gedit by typing ``gedit``. Click gear > Preferences > Editor. Disable "Use spaces insead of tabs" (required to edit a Makefile). Close gedit.
+2. Open gedit by typing ``gedit``. Click gear > Preferences > Editor. Disable "Use spaces insead of tabs" (required to edit a Makefile). In Menu > Preferences > Plugins, enable Bracket Completion, Code Comment, Color Picker, Git, Quick Highlight, and Sort. Close gedit.
 3. Install Code::Blocks as an optional editor: ``codeblocks``
 4. Use this command to install Visual Studio Code as an optional editor, which can then be launched as ``code``: ``sudo snap install --classic code``
-5. Select Start > Settings > MIME Type Editor. For source code types text/x-c++hdr, text/x-c++src, text/x-java, and text/x-python, double-click the Default Application cell and select Text Editor (this is gedit).
-5. Add the snap binary directory to PATH by adding the following lines to: ``gedit .profile``
+5. Select Start > Settings > MIME Type Editor. For source code types text/x-c++hdr, text/x-c++src, text/x-java, text/x-makefile, text/x-python, click the Default Application cell and select Text Editor (this is gedit).
+6. Add the snap binary directory to PATH by adding the following lines to: ``gedit ~/.profile``
 
 ```
 # set PATH so it includes /snap/bin if it exists
@@ -191,14 +198,27 @@ fi
 1. Install the following package to provide developer documentation: ``devhelp``
 2. Install the following package to support C/C++ development: ``build-essential``
 3. Install the following packages to support C++ GUI development (the -doc versions add documentation to devhelp): ``libgtkmm-3.0-dev libgstreamermm-1.0-dev libgtkmm-3.0-doc libgstreamermm-1.0-doc``
-4. Install the following package to support Java development: ``openjdk-14-jdk``
-    1. Select Java 14 as default from the menu (it will likely report "only one alternative", which is success): ``sudo update-alternatives --config java``
-    2. Add JAVA_HOME to the environment by adding ``JAVA_HOME="/usr/lib/jvm/java-14-openjdk-amd64"`` to this file: ``sudo gedit /etc/environment``
+4. Install the following package to support Java development: ``openjdk-17-jdk``
+   1. Select Java 17 as default from the menu (it will likely report "only one alternative", which is success): ``sudo update-alternatives --config java``
+   2. Add JAVA_HOME to the environment by adding ``JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"`` to this file: ``sudo gedit /etc/environment``
 5. Python 3 is preinstalled, but install the following package to manage Python plug-ins: ``python3-pip``
 6. Install the following package to support debugging and profiling Linux programs: ``valgrind``
 7. Install the following package to support version control (or install ``git-all``, if a stand-alone GUI is also desired): ``git``
 8. Install the following package to support visual differencing and merging: ``meld``
 9. Install the following package to support counting lines of code: ``cloc``
+
+## Update Firefox
+
+Bookmark the following websites to the Firefox Bookmarks Toolbar:
+
+* MyMav: https://www.uta.edu/mymav/
+* Canvas: https://uta.instructure.com/
+* cse13xx: https://mavsuta.sharepoint.com/sites/cse13xx
+* JDK 17: https://docs.oracle.com/en/java/javase/17/
+* JJJ: http://www.cs.trincoll.edu/~ram/jjj/
+* Jenkov: http://tutorials.jenkov.com/
+* Learn C++: https://www.learncpp.com/
+* GitHub: https://github.com/
 
 ## Update .bashrc
 
@@ -241,9 +261,15 @@ Exporting the new virtual machine to a .ova file simplifies distribution to stud
 
 Be sure the virtual machine is configured the way you want it to boot first for the students. Disconnect any shared drives. Changed to windowed rather than full screen mode. Ensure the user to auto-login in student, and that the password is student (they can change it after importing the appliance).
 
-1. In the VirtualBox main window select File -> Export Appliance. 
-2. Select the OVF 1.0 format and click Next. 
-3. Complete the product information. Do NOT specify a license. (Note that if any license is specified, then the students will be asked to accept that license.)
+1. In the VirtualBox main window select File -> Export Appliance, then Next>.
+2. Select the OVF 1.0 format, the OVF filename (see Identification above) and any location you prefer. Set MAC Address Policy to "Strip all network adapter MAC addresses". Enable Write Manfest File and disable Include ISO image files. Click Next>. 
+3. Complete the product information. 
+    * Name is "CSE-VM-3.3.0" (or current version number) - this is the name that will appear in the VM list when this appliance is imported. 
+    * Product is "Computer Science and Engineering Virtual Machine", and the URL is "https://github.com/prof-rice/cse-vm/" (or repository to which you have cloned it). 
+    * Vendor is "University of Texas at Arlington" with URL "https://www.uta.edu/". 
+    * Version is 3.3.0 or current version number. 
+    * Description is "This appliance includes most tools required for select CSE courses offered at UTA." 
+    * License should be left blank, as the Linux-related products are covered under a plethora of licenses. If any license is specified, then the students will be asked to accept that license.
 4. Click Export. This may take some time. Patience.
 
 ## Appendix A
@@ -251,12 +277,12 @@ Be sure the virtual machine is configured the way you want it to boot first for 
 Copy the ``bash_aliases`` file into the student home directory of the virtual machine as file .bash_aliases. This file, along with the configuration documented above, adds the following bash commands to assist the students.
 
 * **e hello.cpp** – Opens the file(s) in each associated default editor (works with .pdf, .png, .jpg... all associated types!). Note that other editors may be invoked manually, e.g.,
-    * **vi hello.cpp** – Opens the file(s) in vim light (use ``sudo apt install vim`` for full vim)
-    * **gedit hello.cpp** – Opens the file(s) in gedit
-    * **code hello.cpp** – Opens the file(s) in Visual Studio Code
-    * **codeblocks hello.cpp** – Opens the file(s) in Code::Blocks
+  * **vi hello.cpp** – Opens the file(s) in vim light (use ``sudo apt install vim`` for full vim)
+  * **gedit hello.cpp** – Opens the file(s) in gedit
+  * **code hello.cpp** – Opens the file(s) in Visual Studio Code
+  * **codeblocks hello.cpp** – Opens the file(s) in Code::Blocks
 * **eall** – Opens .h, .cpp, .java, .py, and Makefile in gedit.  Tabs are sorted by class name, 
-with each .h just to left of its .cpp, and with Makefile to the far right.
+  with each .h just to left of its .cpp, and with Makefile to the far right.
 * **ec class** – Opens class.h and class.cpp
 * **c17 hello.cpp** – Compiles the file(s) using C++ 17 syntax
 * **g17 dialog.cpp** – Compiles the file(s) using C++ 17 syntax with the gtkmm 3.0 libraries
@@ -300,12 +326,8 @@ Here are some additional hints for using VirtualBox.
 * Change your password in bash via **``passwd``**
 * Use View → AutoResize Display 
 * Manage your VMs like data
-    * Load as many VMs as you like, sharing a vdisk if desired – they don’t burn RAM unless they are running!
-    * Take snapshots occasionally, for more info see [the VirtualBox documentation](http://news.filehippo.com/2014/06/use-snapshot-virtualbox/)
+  * Load as many VMs as you like, sharing a vdisk if desired – they don’t burn RAM unless they are running!
+  * Take snapshots occasionally, for more info see [the VirtualBox documentation](http://news.filehippo.com/2014/06/use-snapshot-virtualbox/)
 * NEVER close VirtualBox while a machine is running!
-    * This is like ripping the battery out of your laptop!
-    * Instead, shut down via ⏻ in the lower right corner, the Start menu, or bash’s **``sudo shutdown now``**
-
-
-
-
+  * This is like ripping the battery out of your laptop!
+  * Instead, shut down via ⏻ in the lower right corner, the Start menu, or bash’s **``sudo shutdown now``**

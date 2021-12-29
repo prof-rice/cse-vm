@@ -3,6 +3,7 @@
 
 alias doc='cd ~/Documents/'
 alias dl='cd ~/Downloads/'
+alias usb='cd /media/ ; ls'
 alias dev='cd ~/cse1325/'           # Set to your development repository
 alias prof='cd ~/cse1325-prof/'     # Set to your professor's repository
 
@@ -13,7 +14,7 @@ alias prof='cd ~/cse1325-prof/'     # Set to your professor's repository
 # Change this to your favorite editor, e.g., mousepad, nano, vi, etc
 export EDITOR=gedit
 
-# Open file(s) using the associated application, creating the file if it doesn't exist
+# Edit: open file(s) using the associated application, creating the file if it doesn't exist
 e() {
  for file in "$@" ; do
     if [ ! -f "$file" ]; then
@@ -23,19 +24,19 @@ e() {
     fn=$(basename -- "$file")
     ext="${fn##*.}"
     if [[ "$ext" =~ ^(h|cpp|java|py|txt)$ ]]; then 
-        gedit "$file" &> /dev/null
+        gedit "$file" &> /dev/null &
     else
         xdg-open "$file"
     fi
   done
 }
 
-# Open the header and body of a C++ class
+# Edit Class: open the header and body of a C++ class
 ec () {
   e $1.h $1.cpp
 }
 
-# Open all C++  (header then body), Java, and Python class files in alphabetical order, followed by Makefile
+# Edit All: open all C++  (header then body), Java, and Python class files in alphabetical order, followed by Makefile
 alias eall='shopt -s nullglob ; setsid gedit $(ls -1 *.h *.hpp *.c *.cpp *.java *.py | sort -t. -k1,1 -k2,2r) Makefile* makefile* ; shopt -u nullglob'
 
 # #########
@@ -98,7 +99,7 @@ notify() {
 # enhanced make command
 m() {
   div
-  make -j12 "$@"
+  make -j "$@"
   notify build complete
 }
 
