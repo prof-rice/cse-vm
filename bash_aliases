@@ -96,6 +96,15 @@ notify() {
   return $result
 }
 
+# ######################
+# Java build enhancements
+#
+
+# If build.xml is here use ant, otherwise use javac *.java
+j() { 
+    [ -f build.xml ] && ( ant clean ; ant ) || javac *.java
+}
+
 # enhanced make command
 m() {
   div
